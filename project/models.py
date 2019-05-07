@@ -14,7 +14,9 @@ class Hits(db.Model):
     title = db.Column(db.String(255))
     title_url = db.Column(db.String(255))
     created_at = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp())
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    updated_at = db.Column(
+        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
     author_id = db.Column(db.Integer, db.ForeignKey("artists.id"))
     artist = db.relationship("Artists", backref="singer")
 
@@ -33,7 +35,7 @@ class Hits(db.Model):
             target.title_url = slugify(val)
 
 
-event.listen(Hits.title, 'set', Hits.urlify, retval=False)
+event.listen(Hits.title, "set", Hits.urlify, retval=False)
 
 
 class Artists(db.Model):

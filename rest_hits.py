@@ -1,4 +1,4 @@
 from project import create_app
 
 
-app = create_app('api.cfg')
+app = create_app("api.cfg")
