@@ -2,7 +2,7 @@
 
 The idea of this application is to create a sample Flask-Based API for music radio hits with full support for CRUD methods.
 
-##Basic technologies
+## Basic technologies
 
 * Python 3.6 / 3.7 
 * Black code formatter
