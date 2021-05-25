@@ -1,10 +1,12 @@
 from flask import request, jsonify, Blueprint
 from sqlalchemy import desc
-from project.models import HitsSchema, AllHitsSchema, ArtistSchema, Hits, Artists, db
+from .models import HitsSchema, AllHitsSchema, ArtistSchema, Hits, Artists, db
+
 
 hit_schema = HitsSchema()
 hits_schema = AllHitsSchema(many=True)
 artist_schema = ArtistSchema(many=True)
+
 
 api_bp = Blueprint("api", __name__)
 
