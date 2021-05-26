@@ -26,7 +26,7 @@ def hits():
     if request.method == "GET":
         hit_list = Hits.query.order_by(desc(Hits.created_at)).limit(20)
         result = hits_schema.dump(hit_list)
-        return jsonify(result.data), 200
+        return jsonify(result), 200
     elif request.method == "POST":
         title = request.json["title"]
         artist_id = request.json["artist_id"]
@@ -59,4 +59,4 @@ def single_hit(title_url):
 @api_bp.route("/api/v1/artists", methods=["GET"])
 def get_artist():
     artists = Artists.query.all()
-    return jsonify(artist_schema.dump(artists).data), 200
+    return jsonify(artist_schema.dump(artists)), 200

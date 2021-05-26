@@ -4,8 +4,9 @@ from sqlalchemy import event
 from marshmallow import fields
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from project import app
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 ma = Marshmallow()
 
 
