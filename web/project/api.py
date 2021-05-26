@@ -5,7 +5,8 @@ from .models import HitsSchema, AllHitsSchema, ArtistSchema, Hits, Artists, db
 
 hit_schema = HitsSchema()
 hits_schema = AllHitsSchema(many=True)
-artist_schema = ArtistSchema(many=True)
+artist_schema = ArtistSchema()
+artists_schema = ArtistSchema(many=True)
 
 
 api_bp = Blueprint("api", __name__)
@@ -56,7 +57,15 @@ def single_hit(title_url):
         return jsonify({"Message": f"{hit.title} succesfully deleted"}), 200
 
 
-@api_bp.route("/api/v1/artists", methods=["GET"])
-def get_artist():
-    artists = Artists.query.all()
-    return jsonify(artist_schema.dump(artists)), 200
+@api_bp.route("/api/v1/artists", methods=["GET", "POST"])
+def artists():
+    if request.method == "GET":
+        artists = Artists.query.all()
+        return jsonify(artists_schema.dump(artists)), 200
+    elif request.method == "POST":
+        first_name = request.json["first_name"]
+        last_name = request.json["last_name"]
+        new_artist = Artists(first_name=first_name, last_name=last_name)
+        db.session.add(new_artist)
+        db.session.commit()
+        return artist_schema.jsonify(new_artist), 200

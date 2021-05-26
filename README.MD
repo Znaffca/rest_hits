@@ -19,8 +19,8 @@ The idea of this application is to create a sample Flask-Based API for music rad
 - [ ] write functional test for API URL's
 - [x] dockerize the app
 - [ ] - add post and put method to add and edit artists:
-    - [ ] ```/api/v1/artists``` - for POST
-    - [ ] ```/api/v1/artists/<id>``` for PUT and DELETE
+    - [x] ```/api/v1/artists``` - for POST
+    - [ ] ```/api/v1/artists/<id>``` for GET, PUT and DELETE
 
 #### Available url's
 
