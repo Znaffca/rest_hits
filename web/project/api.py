@@ -24,7 +24,7 @@ def not_found(e):
 @api_bp.route("/api/v1/hits", methods=["GET", "POST"])
 def hits():
     if request.method == "GET":
-        hit_list = Hits.query.order_by(desc(Hits.created_at)).limit(20)
+        hit_list = Hits.query.order_by(desc(Hits.created_at))
         result = hits_schema.dump(hit_list)
         return jsonify(result), 200
     elif request.method == "POST":

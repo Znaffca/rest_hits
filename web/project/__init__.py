@@ -13,5 +13,6 @@ def create_app(config_object=None):
     app.register_blueprint(api_bp)
     return app
 
+
 config_obj = Config()
 app = create_app(config_obj)

@@ -171,6 +171,7 @@ celerybeat-schedule
 
 # Environments
 .env
+web/.env.dev
 .venv
 env/
 venv/
