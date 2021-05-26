@@ -13,12 +13,14 @@ The idea of this application is to create a sample Flask-Based API for music rad
 * Support for Docker containers
 * Use sample random data generator (Faker)
 
-### To-Do-List (Update 07.05.2019)
+### To-Do-List (Update 26.05.2021)
 
-- limit all hits to display in ```/api/v1/hits```, and sort all positions by creation date
-- write functional test for API URL's
-- dockerize the app
-- [POST] - ```/api/v1/artists``` - for edit artists
+- [x] limit all hits to display in ```/api/v1/hits```, and sort all positions by creation date
+- [ ] write functional test for API URL's
+- [x] dockerize the app
+- [ ] - add post and put method to add and edit artists:
+    - [ ] ```/api/v1/artists``` - for POST
+    - [ ] ```/api/v1/artists/<id>``` for PUT and DELETE
 
 #### Available url's
 
@@ -36,8 +38,33 @@ The idea of this application is to create a sample Flask-Based API for music rad
 
 
 ## RUN APP
+Application is currently dockerized , so the running it is pretty straightforward.
 
-1. Clone repository on your PC.
-2. Create new virtualenv and install requirements by ```pip install -r requirements.txt```
-3. In app top-level directory run ```python init_db.py``` for generate random data to database
-4. Run ```export FLASK_APP=rest_hits.py```, and next ``` flask run ```
+1. Clone repository on your computer
+2. Navigate to the project root and create the following environmnet files:
+    - `.env` - for storing application variables; feel free to copy example below:
+        ```bash
+            # flask app settings
+            FLASK_APP=project/__init__.py
+            FLASK_ENV=development
+            SECRET_KEY=dev
+            # flask app database settings
+            DATABASE_URL=postgresql://hits_api_user:hits_api_password@db:5432/rest_hits
+            DATABASE=postgres
+            SQL_HOST=db
+            SQL_PORT=5432 
+        ```
+    - `env.db` - for storing postgres container database; feel free to copy the example below:
+        ```bash
+            # envs required for postgres db configuration
+            POSTGRES_USER=hits_api_user
+            POSTGRES_PASSWORD=hits_api_password
+            POSTGRES_DB=rest_hits
+        ```
+3. Execute command:
+    ```bash
+        # for build and start environmnent
+        docker-compose up -d --build
+        # for stop and remove the enviromnent
+        docker-compose down -v # -v removes stored volumes as well
+    ```
