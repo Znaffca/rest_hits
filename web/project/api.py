@@ -1,10 +1,12 @@
 from flask import request, jsonify, Blueprint
 from sqlalchemy import desc
-from project.models import HitsSchema, AllHitsSchema, ArtistSchema, Hits, Artists, db
+from .models import HitsSchema, AllHitsSchema, ArtistSchema, Hits, Artists, db
+
 
 hit_schema = HitsSchema()
 hits_schema = AllHitsSchema(many=True)
 artist_schema = ArtistSchema(many=True)
+
 
 api_bp = Blueprint("api", __name__)
 
@@ -22,9 +24,9 @@ def not_found(e):
 @api_bp.route("/api/v1/hits", methods=["GET", "POST"])
 def hits():
     if request.method == "GET":
-        hit_list = Hits.query.order_by(desc(Hits.created_at)).limit(20)
+        hit_list = Hits.query.order_by(desc(Hits.created_at))
         result = hits_schema.dump(hit_list)
-        return jsonify(result.data), 200
+        return jsonify(result), 200
     elif request.method == "POST":
         title = request.json["title"]
         artist_id = request.json["artist_id"]
@@ -57,4 +59,4 @@ def single_hit(title_url):
 @api_bp.route("/api/v1/artists", methods=["GET"])
 def get_artist():
     artists = Artists.query.all()
-    return jsonify(artist_schema.dump(artists).data), 200
+    return jsonify(artist_schema.dump(artists)), 200
