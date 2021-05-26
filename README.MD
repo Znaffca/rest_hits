@@ -16,11 +16,11 @@ The idea of this application is to create a sample Flask-Based API for music rad
 ### To-Do-List (Update 26.05.2021)
 
 - [x] limit all hits to display in ```/api/v1/hits```, and sort all positions by creation date
-- [] write functional test for API URL's
+- [ ] write functional test for API URL's
 - [x] dockerize the app
-- [] - add post and put method to add and edit artists:
-    - [] ```/api/v1/artists``` - for POST
-    - [] ```/api/v1/artists/<id>``` for PUT and DELETE
+- [ ] - add post and put method to add and edit artists:
+    - [ ] ```/api/v1/artists``` - for POST
+    - [ ] ```/api/v1/artists/<id>``` for PUT and DELETE
 
 #### Available url's
 
