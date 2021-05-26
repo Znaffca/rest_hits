@@ -4,8 +4,8 @@
 
 # Visual studio code
 
-#.vscode/
-#.vscode/*
+.vscode/
+.vscode/*
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
