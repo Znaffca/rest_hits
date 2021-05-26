@@ -71,3 +71,9 @@ class ArtistSchema(ma.Schema):
     class Meta:
         fields = ("id", "first_name", "last_name")
         ordered = True
+
+
+class ArtistDetailSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "first_name", "last_name", "created_at", "hit")
+        ordered = True
