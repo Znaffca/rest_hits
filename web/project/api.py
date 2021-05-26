@@ -1,11 +1,19 @@
 from flask import request, jsonify, Blueprint
 from sqlalchemy import desc
-from .models import HitsSchema, AllHitsSchema, ArtistSchema, Hits, Artists, db
+from .models import (
+    HitsSchema,
+    AllHitsSchema,
+    ArtistSchema,
+    ArtistDetailSchema,
+    Hits,
+    Artists,
+    db,
+)
 
 
 hit_schema = HitsSchema()
 hits_schema = AllHitsSchema(many=True)
-artist_schema = ArtistSchema()
+artist_schema = ArtistDetailSchema()
 artists_schema = ArtistSchema(many=True)
 
 
@@ -69,3 +77,26 @@ def artists():
         db.session.add(new_artist)
         db.session.commit()
         return artist_schema.jsonify(new_artist), 200
+
+
+@api_bp.route("/api/v1/artists/<id>", methods=["GET", "PUT", "DELETE"])
+def get_artist(id):
+    artist = Artists.query.get_or_404(id)
+    if request.method == "GET":
+        return artist_schema.jsonify(artist), 200
+    elif request.method == "PUT":
+        artist.first_name = request.json["first_name"]
+        artist.last_name = request.json["last_name"]
+        db.session.commit()
+        return artist_schema.jsonify(artist), 201
+    elif request.method == "DELETE":
+        db.session.delete(artist)
+        db.session.commit()
+        return (
+            jsonify(
+                {
+                    "Message": f"{artist.first_name} {artist.last_name} with id {artist.id} succesfully deleted"
+                }
+            ),
+            200,
+        )
